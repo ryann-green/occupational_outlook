@@ -1,0 +1,29 @@
+Problem: For the employment detailed by occupation, we want to scrape the data from the website but need to know the employment occupation hierarchy as indicated by the matrix code as everything is listed in one table and it is not clear which occupations are children/parents of the other. 
+
+Solution thought process: I need to programmatically define the rules that identify the parent-child relationship of occupations. I will analyze patterns of the matrix codes and list the rules below. Once finished I will create the code to map the logic, test, and verify if this method provides my desired result.
+
+
+Logic:
+1. If the last 4 digits are all 4's then the first two numbers represent the occupational groups(dict2) (has children)
+
+    2. If the 3rd digit is not a 0, and the last two digits are 0's then it is the 2nd layer of summary groups (dict3)
+
+        3. If the 3rd and 4th digit is the same as the 3rd group, then it goes in the 4th layer (dict4) 
+
+            3A-If last digit is a 0 and the occupation type is Summary, then it is a summary item that will have children
+
+                4A-If the 3rd, 4th, and 5th numbers are the same as 3A, then it is a child of 3A (dict5)
+
+            3B-If the last digit is a 0 and the occupation type is Line Item, then it is a line item
+
+            3C-If the last digit is not a 0, then it is a line item
+            
+            
+            
+Think/Discussion- Why wouldn't I just throw the table into an excel sheet and manually make my mapping? Or why shouldn't I just hand-write the mapping based on what I see?
+
+
+
+How do I want to represent this data?
+
+1st Table- Line item table with data shown for each line item (none of the summary labels. I will need to aggregate the line data based on the hierarchy of the 2nd table
